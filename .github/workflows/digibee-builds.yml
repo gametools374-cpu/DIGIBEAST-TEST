@@ -1,0 +1,90 @@
+name: "🐝 Digibee Multi-Platform Build"
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Run Digibee Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Cache Library
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: test-Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+
+      - name: Run Tests
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          unityVersion: 2022.3.0f1
+          customParameters: -executeMethod DigibeeTestCLI.RunAllTestsFromCLI -logFile /tmp/unity.log
+
+      - name: Upload Test Logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-logs
+          path: |
+            /tmp/unity.log
+            unity-junit.xml
+
+  build:
+    name: Build for ${{ matrix.targetPlatform }}
+    needs: test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - targetPlatform: WebGL
+            os: ubuntu-latest
+          - targetPlatform: StandaloneWindows64
+            os: windows-2022
+          - targetPlatform: StandaloneOSX
+            os: macos-latest
+          - targetPlatform: Android
+            os: ubuntu-latest
+          - targetPlatform: iOS
+            os: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Cache Library
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: build-${{ matrix.targetPlatform }}-Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+
+      - name: Free Disk Space (Android)
+        if: matrix.targetPlatform == 'Android'
+        uses: jlumbroso/free-disk-space@v2
+
+      - name: Build Project
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          unityVersion: 2022.3.0f1
+          targetPlatform: ${{ matrix.targetPlatform }}
+          buildName: Digibee_${{ matrix.targetPlatform }}
+
+      - name: Upload Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.targetPlatform }}
+          path: build/Digibee_${{ matrix.targetPlatform }}

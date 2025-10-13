@@ -1,0 +1,404 @@
+{
+  "m_SGVersion": 3,
+  "m_Type": "UnityEditor.ShaderGraph.GraphData",
+  "m_ObjectId": "mainGraph",
+  "m_Properties": [
+    {
+      "m_Id": "0",
+      "m_Name": "_Intensity",
+      "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+          "serializedVersion": "2",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.0,
+          "height": 0.0
+        }
+      },
+      "m_ContentHash": "00000000000000000000000000000000",
+      "m_OverrideReferenceName": "",
+      "m_GeneratePropertyBlock": true,
+      "m_Precision": 0,
+      "overrideHLSLDeclaration": false,
+      "hlslDeclarationOverride": 0,
+      "m_Hidden": false,
+      "m_Value": 0.0,
+      "m_FloatType": 1,
+      "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+      }
+    },
+    {
+      "m_Id": "1",
+      "m_Name": "_RivalTint",
+      "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+          "serializedVersion": "2",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.0,
+          "height": 0.0
+        }
+      },
+      "m_ContentHash": "00000000000000000000000000000000",
+      "m_OverrideReferenceName": "",
+      "m_GeneratePropertyBlock": true,
+      "m_Precision": 0,
+      "overrideHLSLDeclaration": false,
+      "hlslDeclarationOverride": 0,
+      "m_Hidden": false,
+      "m_Value": {
+        "r": 0.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 1.0
+      },
+      "m_ColorMode": 0
+    },
+    {
+      "m_Id": "2",
+      "m_Name": "_MainTex",
+      "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+          "serializedVersion": "2",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.0,
+          "height": 0.0
+        }
+      },
+      "m_ContentHash": "00000000000000000000000000000000",
+      "m_OverrideReferenceName": "",
+      "m_GeneratePropertyBlock": true,
+      "m_Precision": 0,
+      "overrideHLSLDeclaration": false,
+      "hlslDeclarationOverride": 0,
+      "m_Hidden": false,
+      "m_DefaultReferenceName": "_MainTex",
+      "m_TextureType": 0,
+      "m_Mode": 0,
+      "m_DefaultTexture": null
+    }
+  ],
+  "m_Nodes": [
+    {
+      "m_Id": "intensityNode",
+      "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+      "m_Property": {
+        "m_Id": "0"
+      },
+      "m_DrawState": {
+        "m_Position": {
+          "x": -800,
+          "y": -100,
+          "width": 150,
+          "height": 50
+        }
+      },
+      "m_Slots": [
+        {
+          "m_Id": "intensityOut",
+          "m_SlotType": 1,
+          "m_Type": 0
+        }
+      ]
+    },
+    {
+      "m_Id": "tintColorNode",
+      "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+      "m_Property": {
+        "m_Id": "1"
+      },
+      "m_DrawState": {
+        "m_Position": {
+          "x": -800,
+          "y": 0,
+          "width": 150,
+          "height": 50
+        }
+      },
+      "m_Slots": [
+        {
+          "m_Id": "tintColorOut",
+          "m_SlotType": 1,
+          "m_Type": 2
+        }
+      ]
+    },
+    {
+      "m_Id": "baseTexNode",
+      "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+      "m_Property": {
+        "m_Id": "2"
+      },
+      "m_DrawState": {
+        "m_Position": {
+          "x": -800,
+          "y": 100,
+          "width": 150,
+          "height": 50
+        }
+      },
+      "m_Slots": [
+        {
+          "m_Id": "baseTexOut",
+          "m_SlotType": 1,
+          "m_Type": 10
+        }
+      ]
+    },
+    {
+      "m_Id": "sampleNode",
+      "m_Type": "UnityEditor.ShaderGraph.SampleTexture2DNode",
+      "m_DrawState": {
+        "m_Position": {
+          "x": -600,
+          "y": 100,
+          "width": 200,
+          "height": 150
+        }
+      },
+      "m_Slots": [
+        {
+          "m_Id": "sampleRGBA",
+          "m_SlotType": 1,
+          "m_Type": 2
+        },
+        {
+          "m_Id": "textureIn",
+          "m_SlotType": 0,
+          "m_Type": 10
+        },
+        {
+          "m_Id": "uvIn",
+          "m_SlotType": 0,
+          "m_Type": 1
+        }
+      ]
+    },
+    {
+      "m_Id": "lerpNode",
+      "m_Type": "UnityEditor.ShaderGraph.LerpNode",
+      "m_DrawState": {
+        "m_Position": {
+          "x": -400,
+          "y": -50,
+          "width": 150,
+          "height": 150
+        }
+      },
+      "m_Slots": [
+        {
+          "m_Id": "lerpOut",
+          "m_SlotType": 1,
+          "m_Type": 2
+        },
+        {
+          "m_Id": "a",
+          "m_SlotType": 0,
+          "m_Type": 2
+        },
+        {
+          "m_Id": "b",
+          "m_SlotType": 0,
+          "m_Type": 2
+        },
+        {
+          "m_Id": "t",
+          "m_SlotType": 0,
+          "m_Type": 0
+        }
+      ]
+    },
+    {
+      "m_Id": "vertexColorNode",
+      "m_Type": "UnityEditor.ShaderGraph.VertexColorNode",
+      "m_DrawState": {
+        "m_Position": {
+          "x": -800,
+          "y": 200,
+          "width": 150,
+          "height": 100
+        }
+      },
+      "m_Slots": [
+        {
+          "m_Id": "vertexColorOut",
+          "m_SlotType": 1,
+          "m_Type": 2
+        }
+      ]
+    },
+    {
+      "m_Id": "multiplyNode",
+      "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
+      "m_DrawState": {
+        "m_Position": {
+          "x": -600,
+          "y": 200,
+          "width": 150,
+          "height": 100
+        }
+      },
+      "m_Slots": [
+        {
+          "m_Id": "multiplyOut",
+          "m_SlotType": 1,
+          "m_Type": 2
+        },
+        {
+          "m_Id": "a",
+          "m_SlotType": 0,
+          "m_Type": 2
+        },
+        {
+          "m_Id": "b",
+          "m_SlotType": 0,
+          "m_Type": 2
+        }
+      ]
+    },
+    {
+      "m_Id": "masterNode",
+      "m_Type": "UnityEditor.ShaderGraph.UrpMasterNode1",
+      "m_DrawState": {
+        "m_Position": {
+          "x": 0,
+          "y": 0,
+          "width": 300,
+          "height": 400
+        }
+      },
+      "m_Slots": [
+        {
+          "m_Id": "baseColorIn",
+          "m_SlotType": 0,
+          "m_Type": 2
+        },
+        {
+          "m_Id": "emissionIn",
+          "m_SlotType": 0,
+          "m_Type": 2
+        }
+      ]
+    }
+  ],
+  "m_Edges": [
+    {
+      "m_OutputSlot": {
+        "m_Node": {
+          "m_Id": "baseTexNode"
+        },
+        "m_SlotId": "baseTexOut"
+      },
+      "m_InputSlot": {
+        "m_Node": {
+          "m_Id": "sampleNode"
+        },
+        "m_SlotId": "textureIn"
+      }
+    },
+    {
+      "m_OutputSlot": {
+        "m_Node": {
+          "m_Id": "sampleNode"
+        },
+        "m_SlotId": "sampleRGBA"
+      },
+      "m_InputSlot": {
+        "m_Node": {
+          "m_Id": "lerpNode"
+        },
+        "m_SlotId": "a"
+      }
+    },
+    {
+      "m_OutputSlot": {
+        "m_Node": {
+          "m_Id": "tintColorNode"
+        },
+        "m_SlotId": "tintColorOut"
+      },
+      "m_InputSlot": {
+        "m_Node": {
+          "m_Id": "lerpNode"
+        },
+        "m_SlotId": "b"
+      }
+    },
+    {
+      "m_OutputSlot": {
+        "m_Node": {
+          "m_Id": "intensityNode"
+        },
+        "m_SlotId": "intensityOut"
+      },
+      "m_InputSlot": {
+        "m_Node": {
+          "m_Id": "lerpNode"
+        },
+        "m_SlotId": "t"
+      }
+    },
+    {
+      "m_OutputSlot": {
+        "m_Node": {
+          "m_Id": "lerpNode"
+        },
+        "m_SlotId": "lerpOut"
+      },
+      "m_InputSlot": {
+        "m_Node": {
+          "m_Id": "masterNode"
+        },
+        "m_SlotId": "baseColorIn"
+      }
+    },
+    {
+      "m_OutputSlot": {
+        "m_Node": {
+          "m_Id": "vertexColorNode"
+        },
+        "m_SlotId": "vertexColorOut"
+      },
+      "m_InputSlot": {
+        "m_Node": {
+          "m_Id": "multiplyNode"
+        },
+        "m_SlotId": "a"
+      }
+    },
+    {
+      "m_OutputSlot": {
+        "m_Node": {
+          "m_Id": "multiplyNode"
+        },
+        "m_SlotId": "multiplyOut"
+      },
+      "m_InputSlot": {
+        "m_Node": {
+          "m_Id": "masterNode"
+        },
+        "m_SlotId": "emissionIn"
+      }
+    }
+  ],
+  "m_FragmentContext": {
+    "m_Blocks": [
+      {
+        "m_Id": "masterNode"
+      }
+    ]
+  },
+  "m_SubTarget": {
+    "m_Type": "UnityEditor.ShaderGraph.URPSpriteLitSubTarget"
+  },
+  "m_ActiveSubTarget": {
+    "m_Id": "universalSubTarget"
+  },
+  "m_Version": 1
+}

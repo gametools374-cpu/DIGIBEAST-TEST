@@ -6,17 +6,17 @@ public class EvolutionManager : ManagerBase<EvolutionManager>
 {
     void OnEnable()
     {
-        DigibeeCore.OnLevelUp += CheckEvolution;
+        DigibeastCore.OnLevelUp += CheckEvolution;
     }
 
     void OnDisable()
     {
-        DigibeeCore.OnLevelUp -= CheckEvolution;
+        DigibeastCore.OnLevelUp -= CheckEvolution;
     }
 
-    void CheckEvolution(DigibeeInstance instance)
+    void CheckEvolution(DigibeastInstance instance)
     {
-        var line = DigibeeManager.Instance.GetLine(instance.line);
+        var line = DigibeastManager.Instance.GetLine(instance.line);
         if (line == null) return;
 
         for (int i = 0; i < line.forms.Length; i++)
@@ -27,7 +27,7 @@ public class EvolutionManager : ManagerBase<EvolutionManager>
                 if (!string.IsNullOrEmpty(form.itemReq) && !Inventory.Instance.Has(form.itemReq)) continue;
 
                 instance.currentForm = i + 1;
-                DigibeeManager.Instance.CalculateStats(instance);
+                DigibeastManager.Instance.CalculateStats(instance);
                 AudioManager.Instance.PlayEvo(line.name);
                 Debug.Log($"{instance.line} evolved to {form.name}");
                 break;

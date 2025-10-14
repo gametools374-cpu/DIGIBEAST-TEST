@@ -74,7 +74,7 @@ public class BattleUI : MonoBehaviour
     void SubscribeToEvents()
     {
         if (GameState.IsInstantiated) GameState.OnPlayerHealthChanged += OnHealthChanged;
-        PlayerController.OnDigibeeChanged += OnDigibeeChanged;
+        PlayerController.OnDigibeastChanged += OnDigibeastChanged;
         PlayerController.OnPPChanged += OnPPChanged;
         StaticWraithController.OnPhaseChanged += (phase) => ShowBossPhase("WRAITH", phase, Color.red);
         ChronoGuardController.OnPhaseChanged += (phase) => ShowBossPhase("CHRONO", phase, new Color(0.6f, 0f, 0.8f));
@@ -85,7 +85,7 @@ public class BattleUI : MonoBehaviour
     void UnsubscribeFromEvents()
     {
         if (GameState.IsInstantiated) GameState.OnPlayerHealthChanged -= OnHealthChanged;
-        PlayerController.OnDigibeeChanged -= OnDigibeeChanged;
+        PlayerController.OnDigibeastChanged -= OnDigibeastChanged;
         PlayerController.OnPPChanged -= OnPPChanged;
         StaticWraithController.OnPhaseChanged -= (phase) => { };
         ChronoGuardController.OnPhaseChanged -= (phase) => { };
@@ -98,15 +98,15 @@ public class BattleUI : MonoBehaviour
         // handled in Update for smoothness
     }
 
-    void OnDigibeeChanged(DigibeeInstance newDigibee)
+    void OnDigibeastChanged(DigibeastInstance newDigibeast)
     {
-        RebuildPPBars(newDigibee);
+        RebuildPPBars(newDigibeast);
     }
 
     void OnPPChanged(float totalPP, int charges, bool hasEcho)
     {
-        if (player == null || player.starterDigibee == null) return;
-        foreach (var kvp in player.starterDigibee.pp)
+        if (player == null || player.starterDigibeast == null) return;
+        foreach (var kvp in player.starterDigibeast.pp)
         {
             string type = kvp.Key;
             float ppValue = kvp.Value;
@@ -133,12 +133,12 @@ public class BattleUI : MonoBehaviour
         flashRoutine = null;
     }
 
-    void RebuildPPBars(DigibeeInstance digibee)
+    void RebuildPPBars(DigibeastInstance digibeast)
     {
         foreach (var bar in ppBars.Values) if (bar != null) Destroy(bar.gameObject);
         ppBars.Clear();
-        if (digibee == null) return;
-        foreach (var kvp in digibee.pp)
+        if (digibeast == null) return;
+        foreach (var kvp in digibeast.pp)
         {
             var bar = Instantiate(ppBarPrefab, ppContainer);
             bar.Initialize(kvp.Key, GetPPColor(kvp.Key));

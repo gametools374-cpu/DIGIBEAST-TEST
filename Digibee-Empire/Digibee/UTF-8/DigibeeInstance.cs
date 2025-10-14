@@ -1,23 +1,23 @@
-// DigibeeInstance.cs
-// Runtime copy of a Digibee.
+// DigibeastInstance.cs
+// Runtime copy of a Digibeast.
 using System;
 using UnityEngine;
 
 [Serializable]
-public class DigibeeInstance
+public class DigibeastInstance
 {
     public string line;
     public int currentForm = 0;
     public int level = 5;
-    public DigibeeStats ivs = new DigibeeStats();
-    public DigibeeStats evs = new DigibeeStats();
+    public DigibeastStats ivs = new DigibeastStats();
+    public DigibeastStats evs = new DigibeastStats();
     public Nature nature = new Nature();
-    public DigibeeStats stats = new DigibeeStats();
+    public DigibeastStats stats = new DigibeastStats();
     public System.Collections.Generic.Dictionary<string, int> pp = new System.Collections.Generic.Dictionary<string, int>();
 }
 
 [Serializable]
-public class DigibeeStats
+public class DigibeastStats
 {
     public int hp, atk, def, spAtk, spDef, speed;
 }

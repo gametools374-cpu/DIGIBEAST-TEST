@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "Digibee/EnemyPatrol")]
+[CreateAssetMenu(menuName = "Digibeast/EnemyPatrol")]
 public class EnemyPatrolData : ScriptableObject {
     public string zone;
     public List<Vector3> waypoints;

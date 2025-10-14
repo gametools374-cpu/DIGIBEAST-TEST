@@ -1,2 +1,2 @@
 # Data Folder
-ScriptableObjects for Digibee lines, moves, rival behaviors.
+ScriptableObjects for Digibeast lines, moves, rival behaviors.

@@ -40,8 +40,8 @@ public class SupabaseDB : MonoBehaviour
         return response?["progress_json"].ToString();
     }
 
-    // Similar async methods for Digibees, Inventory, Relics (use JSONB fields)
-    // e.g., SaveDigibee: client.From("digibees").Upsert({ id, player_id, line, ... })
+    // Similar async methods for Digibeasts, Inventory, Relics (use JSONB fields)
+    // e.g., SaveDigibeast: client.From("digibeasts").Upsert({ id, player_id, line, ... })
 
     // For Trades: Realtime subscribe for updates
     public void SubscribeToTrades(System.Action<TradeUpdate> onUpdate)

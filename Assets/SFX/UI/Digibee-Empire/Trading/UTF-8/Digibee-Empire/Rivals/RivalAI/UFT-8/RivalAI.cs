@@ -7,7 +7,7 @@ using UnityEngine;
 public class RivalAI : MonoBehaviour
 {
     public string rivalName;
-    public DigibeeInstance digibee;
+    public DigibeastInstance digibeast;
     public List<AIState> states = new List<AIState>();
     public string currentState = "Idle";
 
@@ -21,7 +21,7 @@ public class RivalAI : MonoBehaviour
                 if (!string.IsNullOrEmpty(action.taunt))
                     AudioManager.Instance.PlayTaunt(rivalName, action.taunt);
                 if (!string.IsNullOrEmpty(action.move))
-                    digibee.GetComponent<DigibeeCore>().UseMove(action.move);
+                    digibeast.GetComponent<DigibeastCore>().UseMove(action.move);
                 currentState = s.name;
                 break;
             }

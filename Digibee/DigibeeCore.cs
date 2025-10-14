@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class DigibeeCore : MonoBehaviour {
-    public DigibeeInstance digibee;
+public class DigibeastCore : MonoBehaviour {
+    public DigibeastInstance digibeast;
     public void CheckEvolution() {
         // ...existing code...
     }
     public void UseMove(string moveName) {
         // ...existing code...
     }
-    public static DigibeeStats CalculateStats(DigibeeInstance digibee) {
+    public static DigibeastStats CalculateStats(DigibeastInstance digibeast) {
         // ...existing code...
-        return new DigibeeStats();
+        return new DigibeastStats();
     }
 }

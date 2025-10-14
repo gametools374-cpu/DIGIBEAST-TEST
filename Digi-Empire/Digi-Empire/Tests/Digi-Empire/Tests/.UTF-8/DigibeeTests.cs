@@ -1,41 +1,16 @@
-// DigibeeTests.cs
-#if UNITY_EDITOR
-using UnityEngine;
-
-public class DigibeeTests : MonoBehaviour
+public class SimplePool<T> where T : Component
 {
-    [ContextMenu("Run Evo Test")]
-    void TestEvo()
+    readonly T prefab;
+    readonly Stack<T> stack = new Stack<T>();
+    public SimplePool(T prefab) { this.prefab = prefab; }
+    public T Get()
     {
-        var line = DigibeeManager.Instance.GetLine("Aetheriel");
-        var inst = new DigibeeInstance { line = "Aetheriel", currentForm = 0, level = 28 };
-        Inventory.Instance.AddItem("EtherShard");
-        EvolutionManager.Instance.CheckEvolution(inst);
-        Debug.Assert(inst.currentForm == 1, "Evo failed");
+        if (stack.Count > 0) { var obj = stack.Pop(); obj.gameObject.SetActive(true); return obj; }
+        return Object.Instantiate(prefab);
     }
-
-    [ContextMenu("Stat Test Lv50")]
-    void TestStats()
+    public void Return(T obj)
     {
-        var inst = new DigibeeInstance { line = "Aetheriel", currentForm = 2, level = 50 };
-        DigibeeManager.Instance.CalculateStats(inst);
-        Debug.Assert(inst.stats.hp == 120, "Stat calc wrong");
+        obj.gameObject.SetActive(false);
+        stack.Push(obj);
     }
 }
-
-// Small CLI runner for GameCI / Unity Test Runner
-public static class DigibeeTestCLI
-{
-    // Called by Unity Test Runner via -executeMethod
-    public static void RunAllTestsFromCLI()
-    {
-        Debug.Log("DigibeeTestCLI: Running editor smoke tests...");
-        var go = new GameObject("__DigibeeTestRunner__");
-        var t = go.AddComponent<DigibeeTests>();
-        t.TestEvo();
-        t.TestStats();
-        Debug.Log("DigibeeTestCLI: Completed.");
-        Object.DestroyImmediate(go);
-    }
-}
-#endif

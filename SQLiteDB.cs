@@ -13,7 +13,7 @@ public class SQLiteDB : MonoBehaviour
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
         else { Destroy(gameObject); }
 
-        dbPath = Application.persistentDataPath + "/digibee_empire.db";
+        dbPath = Application.persistentDataPath + "/digibeast_empire.db";
         connection = new SQLiteConnection($"URI=file:{dbPath}");
         connection.Open();
         CreateTables();
@@ -28,7 +28,7 @@ public class SQLiteDB : MonoBehaviour
                     id INTEGER PRIMARY KEY,
                     progress_json TEXT
                 );
-                CREATE TABLE IF NOT EXISTS Digibees (
+                CREATE TABLE IF NOT EXISTS Digibeasts (
                     id INTEGER PRIMARY KEY,
                     player_id INTEGER,
                     line TEXT,
@@ -78,8 +78,8 @@ public class SQLiteDB : MonoBehaviour
         }
     }
 
-    // Similar methods for Digibees, Inventory, Relics (use JSON serialization)
-    // e.g., SaveDigibee: INSERT OR REPLACE INTO Digibees (id, player_id, line, ...) VALUES (...)
+    // Similar methods for Digibeasts, Inventory, Relics (use JSON serialization)
+    // e.g., SaveDigibeast: INSERT OR REPLACE INTO Digibeasts (id, player_id, line, ...) VALUES (...)
 
     void OnApplicationQuit()
     {
@@ -154,7 +154,7 @@ public class DataSyncManager : MonoBehaviour
             {
                 // Push local to cloud
                 await SupabaseDB.Instance.SavePlayerProgress(GetPlayerId(), localProgress);
-                await SyncDigibeesToCloud();
+                await SyncDigibeastsToCloud();
                 await SyncInventoryToCloud();
                 await SyncRelicsToCloud();
             }
@@ -162,7 +162,7 @@ public class DataSyncManager : MonoBehaviour
             {
                 // Pull cloud to local
                 SQLiteDB.Instance.SavePlayerProgress(GetPlayerId(), cloudProgress);
-                await SyncDigibeesFromCloud();
+                await SyncDigibeastsFromCloud();
                 await SyncInventoryFromCloud();
                 await SyncRelicsFromCloud();
             }
@@ -186,24 +186,24 @@ public class DataSyncManager : MonoBehaviour
         return string.IsNullOrEmpty(cloudJson);
     }
 
-    private async Task SyncDigibeesToCloud()
+    private async Task SyncDigibeastsToCloud()
     {
-        // Get all local Digibees
-        // Stub: Assume SQLiteDB has GetAllDigibees(int playerId) -> List<DigibeeInstance>
-        List<DigibeeInstance> localDigibees = SQLiteDB.Instance.GetAllDigibees(GetPlayerId());
-        foreach (var digibee in localDigibees)
+        // Get all local Digibeasts
+        // Stub: Assume SQLiteDB has GetAllDigibeasts(int playerId) -> List<DigibeastInstance>
+        List<DigibeastInstance> localDigibeasts = SQLiteDB.Instance.GetAllDigibeasts(GetPlayerId());
+        foreach (var digibeast in localDigibeasts)
         {
-            string json = JsonConvert.SerializeObject(digibee);
-            // Save to cloud: await SupabaseDB.Instance.SaveDigibee(GetPlayerId(), digibee.id, json);
+            string json = JsonConvert.SerializeObject(digibeast);
+            // Save to cloud: await SupabaseDB.Instance.SaveDigibeast(GetPlayerId(), digibeast.id, json);
         }
     }
 
-    private async Task SyncDigibeesFromCloud()
+    private async Task SyncDigibeastsFromCloud()
     {
-        // Get all cloud Digibees
-        // Stub: List<Dictionary<string, object>> cloudData = await SupabaseDB.Instance.GetAllDigibees(GetPlayerId());
-        // foreach: DigibeeInstance digibee = JsonConvert.DeserializeObject<DigibeeInstance>(cloudData["json"]);
-        // SQLiteDB.Instance.SaveDigibee(GetPlayerId(), digibee);
+        // Get all cloud Digibeasts
+        // Stub: List<Dictionary<string, object>> cloudData = await SupabaseDB.Instance.GetAllDigibeasts(GetPlayerId());
+        // foreach: DigibeastInstance digibeast = JsonConvert.DeserializeObject<DigibeastInstance>(cloudData["json"]);
+        // SQLiteDB.Instance.SaveDigibeast(GetPlayerId(), digibeast);
     }
 
     // Similar async methods for Inventory and Relics
@@ -211,14 +211,14 @@ public class DataSyncManager : MonoBehaviour
 
     private void LoadFromLocal()
     {
-        // Load all from SQLite into GameState/DigibeeManager/Inventory
+        // Load all from SQLite into GameState/DigibeastManager/Inventory
         string progressJson = SQLiteDB.Instance.LoadPlayerProgress(GetPlayerId());
         if (!string.IsNullOrEmpty(progressJson))
         {
             // JsonUtility.FromJsonOverwrite(progressJson, GameState.Instance);
             Debug.Log("Loaded from local.");
         }
-        // Load Digibees, Inventory, Relics similarly
+        // Load Digibeasts, Inventory, Relics similarly
     }
 
     private string GetPlayerId()

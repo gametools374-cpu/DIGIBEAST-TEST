@@ -19,7 +19,7 @@ public class BattleManager : ManagerBase<BattleManager>
 [System.Serializable]
 public class BattleState
 {
-    public DigibeeInstance player;
-    public DigibeeInstance rival;
+    public DigibeastInstance player;
+    public DigibeastInstance rival;
     public bool playerWon;
 }

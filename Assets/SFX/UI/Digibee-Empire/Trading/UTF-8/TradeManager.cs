@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 public class TradeManager : ManagerBase<TradeManager>
 {
-    public List<DigibeeInstance> playerOffer = new List<DigibeeInstance>();
-    public List<DigibeeInstance> partnerOffer = new List<DigibeeInstance>();
+    public List<DigibeastInstance> playerOffer = new List<DigibeastInstance>();
+    public List<DigibeastInstance> partnerOffer = new List<DigibeastInstance>();
     public bool locked;
 
-    public void AddToPlayerOffer(DigibeeInstance d) => playerOffer.Add(d);
-    public void AddToPartnerOffer(DigibeeInstance d) => partnerOffer.Add(d);
+    public void AddToPlayerOffer(DigibeastInstance d) => playerOffer.Add(d);
+    public void AddToPartnerOffer(DigibeastInstance d) => partnerOffer.Add(d);
 
     public void LockTrade()
     {
@@ -22,9 +22,9 @@ public class TradeManager : ManagerBase<TradeManager>
     {
         if (!locked) return;
         // swap lists
-        var temp = new List<DigibeeInstance>(playerOffer);
-        Inventory.Instance.RemoveDigibees(playerOffer);
-        Inventory.Instance.AddDigibees(partnerOffer);
+        var temp = new List<DigibeastInstance>(playerOffer);
+        Inventory.Instance.RemoveDigibeasts(playerOffer);
+        Inventory.Instance.AddDigibeasts(partnerOffer);
         // partner logic via Steam callback
         playerOffer.Clear();
         partnerOffer.Clear();

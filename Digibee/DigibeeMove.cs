@@ -1,5 +1,5 @@
 [System.Serializable]
-public class DigibeeMove {
+public class DigibeastMove {
     public int power;
     public float accuracy;
     public int pp;

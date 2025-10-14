@@ -3,7 +3,7 @@ CREATE TABLE players (
     progress_json JSONB
 );
 
-CREATE TABLE digibees (
+CREATE TABLE digibeasts (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     player_id UUID REFERENCES players(id),
     line TEXT,
